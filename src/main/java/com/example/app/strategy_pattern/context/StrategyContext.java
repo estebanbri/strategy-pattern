@@ -9,15 +9,20 @@ public class StrategyContext {
 
     List<Strategy> strategies = new ArrayList<>();
 
-    public Strategy getStrategy (int value) {
+    public void addStrategy(Strategy strategy) {
+        strategies.add(strategy);
+    }
+
+    public void execute(int value) {
+        final Strategy strategy = this.getStrategy(value);
+        strategy.execute();
+    }
+
+    private Strategy getStrategy (int value) {
         return strategies.stream()
                 .filter(strategy -> strategy.isSelected(value))
                 .peek((strategy) ->System.out.println("Strategy selected: " + strategy.getClass().getSimpleName().concat("")))
-                .findFirst().orElse(null);
-    }
-
-    public void addStrategy(Strategy strategy) {
-        strategies.add(strategy);
+                .findFirst().orElseThrow(RuntimeException::new);
     }
 
 }

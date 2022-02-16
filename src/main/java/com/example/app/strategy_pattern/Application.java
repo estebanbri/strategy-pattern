@@ -1,7 +1,6 @@
 package com.example.app.strategy_pattern;
 
 import com.example.app.strategy_pattern.context.StrategyContext;
-import com.example.app.strategy_pattern.strategy.Strategy;
 import com.example.app.strategy_pattern.strategy.impl.ByAStrategy;
 import com.example.app.strategy_pattern.strategy.impl.ByBStrategy;
 
@@ -15,10 +14,7 @@ public class Application {
         strategyContext.addStrategy(new ByAStrategy());
         strategyContext.addStrategy(new ByBStrategy());
 
-
-        Strategy strategy = strategyContext.getStrategy(getRandomInt());
-        Object value = strategy.execute();
-        System.out.println(value);
+        strategyContext.execute(getRandomInt());
     }
 
     static int getRandomInt() {
